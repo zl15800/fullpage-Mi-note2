@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mi note2</title>
+    <link rel="stylesheet" href="css/jquery.fullPage.css">
+    <style>
+    body {
+        color: white;
+    }
+    
+    .slide {
+        text-align: center;
+        font-size: 30px;
+    }
+    
+    .section {
+        text-align: center;
+        padding: 300px 0;
+    }
+    
+    .section:fitst-child p {
+        margin-top: 300px
+    }
+    
+    .section:nth-child(2) h1 {
+        margin-right: 1100px;
+    }
+    
+    .section:nth-child(2) p {
+        line-height: 2;
+        margin-right: -2500px;
+    }
+    
+    .sectionbox {
+        position: absolute;
+        left: 200px;
+        bottom: 100px;
+    }
+    .section:nth-child(3) h1 {
+		font-size: 40px;
+    }
+    .section:nth-child(4) p {
+		margin-top: 60px;
+    }
+    /*		#fullpageMenu{position: fixed;top:0;z-index:999;}*/
+    </style>
+</head>
+
+<body>
+    <!-- 	<ul id="fullpageMenu">
+		<li data-menuanchor="page1" class="active"><a href="#page1">1 secion</a></li>
+		<li data-menuanchor="page2"><a href="#page2">2 secion</a></li>
+		<li data-menuanchor="page3"><a href="#page3">3 secion</a></li>
+		<li data-menuanchor="page4"><a href="#page4">4 secion</a></li>
+	</ul>
+ -->
+    <div id="fullpage">
+        <div class="section">
+            <h1>小米Note 2 双曲面商务旗舰</h1>
+            <h2>一面科技，一面艺术</h2>
+            <p>5.7" 双曲面柔性屏，正反面 3D 曲面玻璃 / 2256万超高像素相机</p>
+        </div>
+        <div class="section">
+            <h1>艺术品般的双曲面<br>背后是创新的柔性屏科技</h1>
+            <p>
+                双曲面的美，源自对屏幕科技的不断探索。小米Note 2 采用 OLED 柔性屏，
+                <br>一块可以弯曲的屏幕*，贴合于艺术品般的曲面玻璃，更高屏占比让纤薄的机身，
+                <br>拥有更大显示面积。画面仿佛在曲面流动，视觉也得到了更大的延展。
+            </p>
+        </div>
+        <div class="section">
+            <div class="sectionbox">
+                <h1 class="tit webfont">
+	                商务旗舰<br>
+	                黑科技，不仅仅是「快」
+		        </h1>
+                <p>
+                    这依然是小米最快的安卓旗舰*！
+                    <br>骁龙821 性能版，高性能下再提速 10%。
+                    <br> 可选 6GB +128GB 高速内存、闪存，进一步提升性能。
+                    <br>4070mAh 电池、高精度定位、HD 高清音质，
+                    <br> 小米Note 2 不仅更快，更是方方面面全高端配置。
+                </p>
+            </div>
+        </div>
+        <div class="section">
+            <h1 class="tit webfont">
+                    亮黑与冰川银
+                </h1>
+            <p>
+                一面光明，一面夜晚的亮黑色，
+                <br> 黑得深邃，而光线照时却很明亮，优雅而神秘。
+                <br> 一面天空，一面大海的银色，
+                <br> 安静得像大海，光线流转时却像天空。
+                <br> 玻璃的材质，却拥有金属光泽，如梦如幻。
+            </p>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/fullPage.js/2.9.4/vendors/jquery.easings.min.js"></script>
+    <script src="js/jquery.fullPage.js"></script>
+    <script src="https://cdn.bootcss.com/move.js/0.5.0/move.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#fullpage').fullpage({
+            //配置项
+            sectionsColor: ['green', 'orange', 'gray', '#D87B66'],
+            //controlArrows:false,
+            verticalCentered: false,
+            //resize:true,
+            //scrollingSpeed:700,
+            anchors: ['page1', 'page2', 'page3', 'page4'],
+            //menu:'#fullageMenu',
+            navigation: true,
+            navigationPosition: 'right',
+            navigationTooltips: ['page1', 'page2', 'page3', 'page4'],
+            afterLoad: function(anchorLink, index) {
+                switch (index) {
+                    case 1:
+                        move('.section h1').scale(1.5).end();
+                        move('.section p').set('margin-top', '5%').end();
+                        break;
+                    case 2:
+                        move('.section:nth-child(2) p').set('margin-right', '0').end();
+                        move('.section:nth-child(2) h1').set('margin-right', '0').end();
+                        break;
+                    case 3:
+                    	move('.section:nth-child(3) h1').scale(0.7).end();
+                        break;
+                    case 4:
+                    	move('.section:nth-child(4) h1').rotate(360).end();
+                        break;
+                    default:
+                        break;
+                }
+            },
+            onLeave: function(index, nextIndex, direction) {
+                var leavingSection = $(this);
+
+                //after leaving section 2
+                if (index == 1 && direction == 'down') {
+                    move('.section h1').scale(1).end();
+                    move('.section p').set('margin-top', '100%').end();
+                }
+                if (index == 2) {
+                    move('.section:nth-child(2) h1').set('margin-right', '1100px').end();
+                    move('.section:nth-child(2) p').set('margin-right', '-2500px').end();
+                }
+                if (index == 3) {
+                    move('.section:nth-child(3) h1').scale(1).end();
+                }
+                if (index == 4) {
+                    move('.section:nth-child(4) h1').rotate(-360).end();
+                }
+            },
+        });
+    });
+    </script>
+</body>
+
+</html>
